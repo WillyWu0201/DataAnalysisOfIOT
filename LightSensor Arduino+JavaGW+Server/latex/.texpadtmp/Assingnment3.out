@@ -1,0 +1,14 @@
+\BOOKMARK [1][-]{section.1}{目標}{}% 1
+\BOOKMARK [1][-]{section.2}{Arduino}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{接腳圖}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{取得Arduino輸出的數值}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{利用Java讀取Arduino數值}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{MySQL}{}% 6
+\BOOKMARK [2][-]{subsection.3.1}{建立資料庫資料}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.2}{Java寫值進MySQL}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.3}{Java連接MySQL讀值}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.4}{產生light.jar檔}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Web}{}% 11
+\BOOKMARK [2][-]{subsection.4.1}{PHP}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.2}{High\040Chart}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.3}{執行結果}{section.4}% 14
