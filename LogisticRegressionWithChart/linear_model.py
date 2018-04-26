@@ -47,6 +47,6 @@ dataOut = pandas.DataFrame(dict1, columns = ["value", "status"])
 # dataOut.to_csv("result.csv")
 data = {'value': 500}
 
-json = json.dumps(dataOut)
+json = json.dumps(data)
 print(json)
 # print(dataOut)
