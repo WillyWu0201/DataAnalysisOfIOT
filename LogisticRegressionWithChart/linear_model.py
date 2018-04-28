@@ -6,7 +6,6 @@ Spyder Editor
 This is a temporary script file.
 """
 
-import sys
 import pandas
 import numpy
 import json
@@ -45,8 +44,9 @@ dataOut = pandas.DataFrame(dict1, columns = ["value", "status"])
 
 # write to csv
 # dataOut.to_csv("result.csv")
-data = {'value': 500}
 
-json = json.dumps(data)
-print(json)
-# print(dataOut)
+# return json format
+values = t_pdX.tolist()
+status = t_npY.tolist()
+jsonized = json.dumps([{'value': values, 'status': status} for values, status in zip(values, status)])
+print(jsonized)
