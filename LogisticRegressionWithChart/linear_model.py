@@ -10,6 +10,7 @@ import pandas
 import numpy
 import json
 from sklearn import linear_model as lm
+import pymysql.cursors
 
 # read training data
 data = pandas.read_csv("training.csv")
@@ -20,33 +21,32 @@ npX = npX.reshape(-1, 1)
 pdY = data["status"]
 npY = numpy.array(pdY)
 
-# read testing data
-test = pandas.read_csv("testing.csv")
-t_pdX = test["value"]
-t_npX = numpy.array(t_pdX)
-t_npX = t_npX.reshape(-1, 1)
-
 # sklearn
 clf = lm.LogisticRegression()
 clf.fit(npX, npY)
 
 # test status
-status = clf.predict(499)
+# status = clf.predict(499)
 
-# predict testing data
-t_npY = clf.predict(t_npX)
-dict1 = {
-        "value": t_pdX,
-        "status": t_npY
-        }
+# connect db
+db = pymysql.connect("172.32.19.7", "iot", "iot", "lightdb")
+cursor = db.cursor()
 
-dataOut = pandas.DataFrame(dict1, columns = ["value", "status"])
+# 執行SQL語法查詢
+cursor.execute("SELECT value, status FROM light")
 
-# write to csv
-# dataOut.to_csv("result.csv")
+# 把搜尋出來的解果轉為ndarray
+rowValue = [item[0] for item in cursor.fetchall()]
+predictValues = numpy.array(rowValue)
+predictValues = predictValues.reshape(-1, 1)
 
-# return json format
-values = t_pdX.tolist()
-status = t_npY.tolist()
-jsonized = json.dumps([{'value': values, 'status': status} for values, status in zip(values, status)])
-print(jsonized)
+# 把values丟到LogisticRegression預測狀態
+predictStatus = clf.predict(predictValues)
+
+# 關閉資料庫
+db.close()
+
+# 輸出結果
+status = predictStatus.tolist()
+result = json.dumps([{'value': rowValue, 'status': status} for rowValue, status in zip(rowValue, status)])
+print(result)
